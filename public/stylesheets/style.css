@@ -1,0 +1,552 @@
+@font-face {
+  font-family: "Jet Brains Regular";
+  src: url("../assets/fonts/JetBrainsMono-Regular.woff2");
+}
+
+@font-face {
+  font-family: "Jet Brains Light";
+  src: url("../assets/fonts/JetBrainsMono-Light.woff2");
+}
+@font-face {
+  font-family: "Jet Brains Bold";
+  src: url("../assets/fonts/JetBrainsMono-Bold.woff");
+}
+@font-face {
+  font-family: "Jet Brains Extra Bold";
+  src: url("../assets/fonts/JetBrainsMono-ExtraBold.woff");
+}
+
+/* General reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Fonts */
+  --light: "Jet Brains Light";
+  --regular: "Jet Brains Regular";
+  --bold: "Jet Brains Bold";
+  --extra-bold: "Jet Brains Extra Bold";
+
+  /* Dark Mode */
+  --bg-color: #121212;
+  --onbg-color: #f1f1f1;
+  --txt-fade-color: #979797;
+
+  /* Layer */
+  --layer-color: #3d3d3d;
+  --onlayer-color: var(--onbg-color);
+
+  /* --primary-color: #a75bff;
+  --primary-color-hover: rgb(139 61 229);
+  --onprimary-color: #000; */
+
+  --primary-color: #f5d547;
+  --primary-color-hover: #d5b00b;
+  --onprimary-color: #000;
+
+  --error-color: #e56399;
+  --onerror-color: #1e1e1e;
+
+  /* Border */
+  --border-color: #636363;
+  --border: 1px solid var(--border-color);
+}
+
+body {
+  font-family: "Jet Brains Regular";
+  background-color: var(--bg-color);
+  color: var(--onbg-color);
+}
+
+.gradient-border {
+  border-width: 4px;
+  border-style: solid;
+  border-image: linear-gradient(to right, darkblue, darkorchid) 1;
+}
+
+.container {
+  max-width: 1024px;
+  padding: 24px;
+  margin: auto;
+}
+
+/******************
+* TITLE
+*******************/
+/******************
+*******************/
+
+/******************
+* CLASSES
+*******************/
+
+.fade-text {
+  color: var(--txt-fade-color);
+}
+.gradient-text {
+  background: linear-gradient(90deg, #ff7eb3, #ff758c);
+  background-clip: text; /* Standard property */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+  font-size: 2.3rem;
+  font-family: var(--extra-bold);
+  text-align: center;
+}
+
+a.active {
+  color: var(--primary-color-hover);
+  text-decoration: underline;
+}
+
+.message {
+  background-color: var(--error-color);
+  color: var(--onerror-color);
+  font-size: 18px;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.error {
+  color: rgb(208, 54, 54);
+  margin: 2px 0;
+}
+/******************
+*******************/
+
+/******************
+* BUTTONS
+*******************/
+
+.btn {
+  padding: 8px 24px;
+  font-family: var(--bold);
+  text-decoration: none;
+  transition: background 0.3s;
+  display: block;
+  width: fit-content;
+}
+
+.primary {
+  background-color: var(--primary-color);
+  color: var(--onprimary-color);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.primary:hover {
+  background-color: var(--primary-color-hover);
+}
+
+/* ************ MAJIC BTN *************** */
+.majic-btn {
+  display: block;
+  cursor: pointer;
+  color: white;
+  margin: 0 auto;
+  position: relative;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 6px;
+  overflow: hidden;
+  padding: 3px;
+  isolation: isolate;
+  text-decoration: none;
+}
+
+.majic-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400%;
+  height: 100%;
+  background: linear-gradient(
+    115deg,
+    #4fcf70,
+    #fad648,
+    #a767e5,
+    #12bcfe,
+    #44ce7b
+  );
+  background-size: 25% 100%;
+  animation: an-at-keyframe-css-at-rule-that-translates-via-the-transform-property-the-background-by-negative-25-percent-of-its-width-so-that-it-gives-a-nice-border-animation_-We-use-the-translate-property-to-have-a-nice-transition-so-it_s-not-a-jerk-of-a-start-or-stop
+    0.75s linear infinite;
+  animation-play-state: paused;
+  translate: -5% 0%;
+  transition: translate 0.25s ease-out;
+}
+
+.majic-btn:hover::before {
+  animation-play-state: running;
+  transition-duration: 0.75s;
+  translate: 0% 0%;
+}
+
+@keyframes an-at-keyframe-css-at-rule-that-translates-via-the-transform-property-the-background-by-negative-25-percent-of-its-width-so-that-it-gives-a-nice-border-animation_-We-use-the-translate-property-to-have-a-nice-transition-so-it_s-not-a-jerk-of-a-start-or-stop {
+  to {
+    transform: translateX(-25%);
+  }
+}
+
+.majic-btn span {
+  text-align: center;
+  position: relative;
+  display: block;
+  padding: 8px;
+  font-size: 1.1rem;
+  background: #000;
+  border-radius: 3px;
+  height: 100%;
+  text-decoration: none;
+}
+
+.majic-btn img {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+/******************
+*******************/
+
+/******************
+* NAVBAR
+*******************/
+/* Navbar Styling */
+
+.navbar {
+  padding: 16px 0;
+  border-bottom: var(--border);
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+/* Logo */
+.logo {
+  font-size: 1.5rem;
+  font-family: var(--extra-bold);
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Navbar Items */
+.nav-item {
+  text-decoration: none;
+  font-size: 1rem;
+  color: var(--onlayer-color);
+  transition: color 0.3s;
+}
+
+.nav-item:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.nav-item.majic-btn:hover {
+  text-decoration: none;
+}
+
+/******************
+*******************/
+
+/******************
+* HERO
+*******************/
+
+.hero {
+  padding: 24px;
+  text-align: center;
+  margin: 24px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 8px;
+}
+
+.hero .btn {
+  margin-top: 24px;
+}
+/******************
+*******************/
+
+/******************
+* POST CARDS
+*******************/
+
+.post-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 30px 20px;
+}
+
+.post-card {
+  padding: 16px 16px 70px 16px;
+  background-color: var(--layer-color);
+  border-radius: 8px;
+  position: relative;
+}
+
+.post-card h4 {
+  color: var(--txt-fade-color);
+  font-family: var(--light);
+}
+
+.post-card p {
+  margin: 16px 0;
+}
+
+.post-card .buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 16px;
+  left: 0;
+}
+
+.buttons .editing {
+  transition: color 0.3s;
+}
+
+.buttons .editing a:hover {
+  text-decoration: underline;
+}
+.buttons .editing a.edit {
+  color: var(--primary-color-hover);
+}
+
+.buttons .editing a.delete {
+  color: var(--error-color);
+}
+.post-card .buttons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-decoration: none;
+  color: var(--onbg-color);
+}
+
+.post-card .buttons a img {
+  width: 25px;
+}
+
+.comments h3 {
+  margin-bottom: 16px;
+}
+.comments h4 {
+  margin-bottom: 16px;
+}
+
+.comment {
+  position: relative;
+  padding: 16px 16px 50px 16px;
+
+  width: max(50%, 300px);
+  background-color: var(--layer-color);
+  border: var(--border);
+}
+
+.comment .reaction {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.comment p {
+  margin: 16px 0;
+}
+
+.comment .reaction a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #f1f1f1;
+  text-decoration: none;
+}
+.comment .reaction a img {
+  width: 25px;
+}
+
+.comment .reaction .editing a.delete {
+  transition: color 0.3s;
+}
+.comment .reaction .editing a.delete:hover {
+  text-decoration: underline;
+  color: var(--error-color);
+}
+/******************
+*******************/
+
+/*************************
+* FORM & FORM ELEMENTS
+**************************/
+form {
+  width: 100%;
+  max-width: 400px;
+  margin: 24px auto;
+}
+
+.create-post-form {
+  min-width: max(70%, 100%);
+}
+
+form + p {
+  text-align: center;
+}
+
+input,
+label {
+  display: flex;
+  width: 100%;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 16px 0;
+}
+
+input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border: var(--border);
+  border-radius: 4px;
+  font-size: 18px;
+  padding: 8px 24px;
+  color: var(--onbg-color);
+  background-color: var(--layer-color);
+}
+
+input:focus {
+  border-width: 2px;
+  border-color: var(--primary-color);
+}
+
+textarea {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border: var(--border);
+  border-radius: 4px;
+  font-size: 18px;
+  padding: 8px 24px;
+  color: var(--onbg-color);
+  background-color: var(--layer-color);
+  text-align: left;
+  min-height: 250px;
+  line-height: 32px;
+}
+
+textarea:focus {
+  border-width: 2px;
+  border-color: var(--primary-color);
+}
+
+input[type="submit"] {
+  margin: 32px auto 20px auto;
+}
+
+/* Comment Form */
+
+.comment {
+  margin-bottom: 16px;
+}
+.comment-form {
+  width: max(60%, 300px);
+  margin: 0px;
+  margin-top: 16px;
+}
+
+.comment-form textarea {
+  width: 100%;
+  min-height: 100px;
+  resize: none;
+}
+.comment-form input[type="submit"] {
+  margin: 0px;
+  margin-top: 16px;
+}
+/*************************
+**************************/
+
+/******************
+* FOOTER
+*******************/
+.footer {
+  padding: 24px;
+  font-size: 17px;
+  text-align: center;
+  display: block;
+  border-top: var(--border);
+  margin-top: 32px;
+}
+/******************
+*******************/
+
+/******************
+* ACCOUNT
+*******************/
+.account {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-direction: column;
+}
+
+.profile {
+  width: 150px;
+  height: 150px;
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  border-radius: 80px;
+  color: var(--onprimary-color);
+}
+
+.profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/******************
+*******************/

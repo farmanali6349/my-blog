@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS LINKED -->
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link
+      rel="shortcut icon"
+      href="/assets/icons/fav.svg"
+      type="image/x-icon"
+    />
+    <title>My Blog | Home</title>
+  </head>
+  <body>
+    <!------------------------------------------>
+    <!-- HOME PAGE -->
+    <!------------------------------------------>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="container">
+        <h2 class="logo">My Blog</h2>
+        <div class="nav-links">
+          <a href="/" class="nav-item">Home</a>
+
+          <% if (!userdata) { %>
+          <!-- Show only if user is not logged in -->
+          <a href="/login" class="nav-item">Login</a>
+          <a href="/signup" class="nav-item">Signup</a>
+          <% } else { %>
+          <!-- Show only if user is logged in -->
+          <a href="/user/<%= userdata?.username %>" class="nav-item">Account</a>
+          <% } %>
+          <a href="/create-post" class="nav-item majic-btn btn">
+            <span>Create Post</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!----------------------------- HERO ----------------------------->
+    <main class="hero">
+      <h1><%= post.title %></h1>
+    </main>
+
+    <!----------------------------- POST CARDS ----------------------------->
+
+    <!---------------- ALL POSTS ---------------->
+    <section class="post-cards container">
+      <div class="post-card">
+        <!-- <h3><%= post.title %></h3> -->
+        <h4>
+          <% if (post.user && post.user.username) { %> @<%= post.user.username
+          %> <% } else { %>
+          <span class="text-muted">@Unknown</span>
+          <% } %>
+        </h4>
+        <p><%= post.content %></p>
+
+        <div class="buttons">
+          <div class="reaction">
+            <a href="/post/like/<%= post._id %>">
+              <% if (post.likes.findIndex(like => like.toString() ===
+              userdata?.id.toString()) === -1) { %>
+              <img src="/assets/icons/like.svg" alt="Like" />
+              <% } else { %>
+              <img src="/assets/icons/like-solid.svg" alt="Like" />
+              <% } %>
+              <span><%= post.likes.length %></span>
+            </a>
+
+            <a href="/post/<%= post.permalink %>">
+              <img src="/assets/icons/comment.svg" alt="Comments" />
+              <span><%= post.comments.length %></span>
+            </a>
+          </div>
+
+          <% if (userdata && String(userdata.id) === String(post.user?._id)) {
+          %>
+          <div class="editing">
+            <a href="/post/edit/<%= post.permalink %>" class="edit">Edit</a>
+            <a href="/post/delete/<%= post._id %>" class="delete">Delete</a>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </section>
+
+    <div class="comments container">
+      <h3>Comments</h3>
+
+      <% if(post.comments.length === 0 ) {%>
+      <h4 class="fade-text">No Comments Yet</h4>
+      <%} %> <% if (post.comments.length > 0){ %> <%
+      post.comments.forEach(comment => { %>
+      <div class="comment">
+        <div class="comment-card">
+          <h4 class="fade-text">
+            <% if (comment.user && comment.user.username) { %> @<%=
+            comment.user.username %> <% } else { %>
+            <span class="text-muted">@Unknown</span>
+            <% } %>
+          </h4>
+          <p><%= comment.text %></p>
+
+          <div class="reaction button">
+            <a href="/comment/like/<%= comment._id %>">
+              <% if ( comment.likes.findIndex((like) => like.toString() ===
+              userdata?.id.toString()) === -1 ) { %>
+              <img src="/assets/icons/like.svg" alt="Like" />
+              <% } else { %>
+              <img src="/assets/icons/like-solid.svg" alt="Like" />
+              <% } %>
+              <span><%= comment.likes ? comment.likes.length : 0 %></span>
+            </a>
+
+            <% if(userdata && String(userdata.id) === String(comment.user._id))
+            {%>
+            <div class="editing">
+              <a
+                href="/comment/delete/<%= comment._id%>/<%= post._id%>"
+                class="delete"
+                >Delete</a
+              >
+            </div>
+            <%}%>
+          </div>
+        </div>
+      </div>
+      <% }); %> <% } %>
+
+      <h3>Add Comment</h3>
+      <form
+        action="/comment/create/<%=post._id%>"
+        method="post"
+        class="comment-form"
+      >
+        <textarea
+          name="comment"
+          placeholder="Express your thoughts about my post !!"
+          required
+        ></textarea>
+        <input type="submit" class="btn primary" />
+      </form>
+    </div>
+
+    <!----------------------------- FOOTER ----------------------------->
+    <p class="footer">
+      &copy; <span id="year"></span> My Blog. All rights reserved.
+    </p>
+
+    <!-- JS LINKED -->
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>

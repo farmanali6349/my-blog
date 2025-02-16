@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS LINKED -->
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link
+      rel="shortcut icon"
+      href="/assets/icons/fav.svg"
+      type="image/x-icon"
+    />
+    <title>My Blog | Signup</title>
+  </head>
+  <body>
+    <!------------------------------------------>
+    <!-- HOME PAGE -->
+    <!------------------------------------------>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="container">
+        <h2 class="logo">My Blog</h2>
+        <div class="nav-links">
+          <a href="/" class="nav-item">Home</a>
+
+          <% if (!userdata?.email) { %>
+          <!-- Show only if user is not logged in -->
+          <a href="/login" class="nav-item">Login</a>
+          <a href="/signup" class="nav-item active">Signup</a>
+          <% } else { %>
+          <!-- Show only if user is logged in -->
+          <a href="/user/<%= userdata.username %>" class="nav-item">Account</a>
+          <% } %>
+          <a href="/create-post" class="nav-item majic-btn btn">
+            <span>Create Post</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ERRO MESSAGE PARA -->
+    <% if (errors?.message) { %>
+    <p class="message"><%= errors.message %></p>
+    <% } %>
+
+    <main class="container signup">
+      <h1 class="title">Sign Up</h1>
+      <form action="/user/signup" method="post">
+        <label for="name">
+          Name *
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Muhammad Ali"
+            value="<%= formData ? formData.name : '' %>"
+            required
+          />
+
+          <!-- Name Error Handling -->
+          <% if (errors?.name) { %>
+          <span class="error"><%= errors.name %></span> <% } %>
+        </label>
+        <label for="username">
+          Username *
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="@uniqueusername"
+            oninput="this.value = this.value.toLowerCase().replace(/\s/g, '')"
+            required
+            value="<%= formData ? formData.username : '' %>"
+          />
+
+          <!-- Username Error Handling -->
+          <% if (errors?.username) { %>
+          <span class="error"><%= errors.username %></span> <% } %>
+        </label>
+
+        <label for="email">
+          Email *
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="example@email.com"
+            required
+            value="<%= formData ? formData.email : '' %>"
+          />
+
+          <!-- Email Error Handling -->
+          <% if (errors?.email) { %>
+          <span class="error"><%= errors.email %></span> <% } %>
+        </label>
+        <label for="password" class="password">
+          Password *
+          <input
+            type="password"
+            name="password"
+            class="password"
+            id="password"
+            class="password"
+            placeholder="**********************"
+            value="<%= formData ? formData.password : '' %>"
+            required
+          />
+
+          <!-- Password Error Handling -->
+          <% if (errors?.password) { %>
+          <span class="error"><%= errors.password %></span> <% } %>
+        </label>
+
+        <input type="submit" value="Singnup" class="btn primary" />
+      </form>
+      <p>Already registered? then <a href="/login">Login Here</a></p>
+    </main>
+    <!----------------------------- FOOTER ----------------------------->
+    <p class="footer">
+      &copy; <span id="year"></span> My Blog. All rights reserved.
+    </p>
+
+    <!-- JS LINKED -->
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS LINKED -->
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link
+      rel="shortcut icon"
+      href="/assets/icons/fav.svg"
+      type="image/x-icon"
+    />
+    <title>My Blog | Login</title>
+  </head>
+  <body>
+    <!------------------------------------------>
+    <!-- HOME PAGE -->
+    <!------------------------------------------>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="container">
+        <h2 class="logo">My Blog</h2>
+        <div class="nav-links">
+          <a href="/" class="nav-item">Home</a>
+
+          <% if (!userdata?.email) { %>
+          <!-- Show only if user is not logged in -->
+          <a href="/login" class="nav-item active">Login</a>
+          <a href="/signup" class="nav-item">Signup</a>
+          <% } else { %>
+          <!-- Show only if user is logged in -->
+          <a href="/user/<%= userdata.username %>" class="nav-item">Account</a>
+          <% } %>
+          <a href="/create-post" class="nav-item majic-btn btn">
+            <span>Create Post</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MESSAGE PARA -->
+    <% if (errors?.message) { %>
+    <p class="message"><%= errors.message %></p>
+    <% } %>
+
+    <main class="container login">
+      <!-- Login -->
+      <h1 class="title">Login</h1>
+      <form action="/user/login" method="post">
+        <label for="email">
+          Email *
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="example@email.com"
+            required
+            value="<%= formData ? formData.email : '' %>"
+          />
+
+          <!-- Email Error Handling -->
+          <% if (errors?.email) { %>
+          <span class="error"><%= errors.email %></span> <% } %>
+        </label>
+        <label for="password" class="password">
+          Password *
+          <input
+            type="password"
+            name="password"
+            class="password"
+            id="password"
+            class="password"
+            placeholder="**********************"
+            required
+          />
+        </label>
+
+        <input type="submit" value="login" class="btn primary" />
+      </form>
+      <p>Not registered? then <a href="/signup">Signup Here</a></p>
+    </main>
+
+    <!----------------------------- FOOTER ----------------------------->
+    <p class="footer">
+      &copy; <span id="year"></span> My Blog. All rights reserved.
+    </p>
+
+    <!-- JS LINKED -->
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>
